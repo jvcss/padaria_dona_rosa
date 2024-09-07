@@ -24,11 +24,34 @@ class BreadCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('$breadCount pães'),
+          Text(
+            '$breadCount ${breadCount == 1 ? 'pão' : 'pães'}',
+            style: const TextStyle(fontSize: 24),
+          ),
           const SizedBox(height: 10),
-          Image.asset('assets/bread.png', width: 100, height: 100),
+          // Dynamically display the correct image based on the bread count
+          Image.asset(
+            _getBreadImage(),
+            width: 100,
+            height: 100,
+          ),
         ],
       ),
     );
+  }
+
+  // Returns the correct image asset path based on the bread count
+  String _getBreadImage() {
+    if (breadCount == 1) {
+      return 'assets/bread.png'; // Single bread
+    } else if (breadCount == 2) {
+      return 'assets/basket_2bread.png'; // Basket with 2 breads
+    } else if (breadCount == 3) {
+      return 'assets/basket_3bread.png'; // Basket with 3 breads
+    } else if (breadCount >= 4) {
+      return 'assets/basket_4bread.png'; // Basket with 4 breads (or more)
+    } else {
+      return 'assets/bread.png'; // Default to single bread
+    }
   }
 }
