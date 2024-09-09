@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
+import 'package:padaria_dona_rosa/discount_calendar_dialog.dart';
 
 class CheckoutScreen extends StatefulWidget {
   final double totalAmount;
@@ -42,69 +41,55 @@ class _CheckoutScreenState extends State<CheckoutScreen> with SingleTickerProvid
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text(
-            'Seu desconto diário',
-            textAlign: TextAlign.center,
-          ), // Custom title for the dialog
-          content: _buildDiscountCalendar(), // Build the custom calendar here
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Close'),
-            ),
-          ],
-        );
+        return const DiscountCalendarDialog(); // Use the new dialog widget
       },
     );
   }
 
-  // Widget for building the custom discount calendar
-  Widget _buildDiscountCalendar() {
-    final DateTime now = DateTime.now();
-    //final int currentDayOfWeek = now.weekday;
-    // Current day of the week (1 = Monday, 7 = Sunday)
+  // // Widget for building the custom discount calendar
+  // Widget _buildDiscountCalendar() {
+  //   final DateTime now = DateTime.now();
+  //   //final int currentDayOfWeek = now.weekday;
+  //   // Current day of the week (1 = Monday, 7 = Sunday)
 
-    return SizedBox(
-      width: double.maxFinite,
-      child: GridView.builder(
-        shrinkWrap: true,
-        itemCount: 7, // Let's assume we're showing one week (7 days)
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 7, // 7 columns for 7 days of the week
-        ),
-        itemBuilder: (context, index) {
-          DateTime day = now.add(Duration(days: index)); // Calculate each day in the week
+  //   return SizedBox(
+  //     width: double.maxFinite,
+  //     child: GridView.builder(
+  //       shrinkWrap: true,
+  //       itemCount: 7, // Let's assume we're showing one week (7 days)
+  //       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+  //         crossAxisCount: 7, // 7 columns for 7 days of the week
+  //       ),
+  //       itemBuilder: (context, index) {
+  //         DateTime day = now.add(Duration(days: index)); // Calculate each day in the week
 
-          // Define the color of each day based on its relative position
-          Color dayColor;
-          if (index == 0) {
-            dayColor = Colors.red; // Today: no discount
-          } else if (index > 0 && index <= 5) {
-            dayColor = Colors.green.withOpacity(index * 0.2); // Gradually more green up to 5th day
-          } else {
-            dayColor = Colors.green; // After 5 days, fully green
-          }
+  //         // Define the color of each day based on its relative position
+  //         Color dayColor;
+  //         if (index == 0) {
+  //           dayColor = Colors.red; // Today: no discount
+  //         } else if (index > 0 && index <= 5) {
+  //           dayColor = Colors.green.withOpacity(index * 0.2); // Gradually more green up to 5th day
+  //         } else {
+  //           dayColor = Colors.green; // After 5 days, fully green
+  //         }
 
-          return Container(
-            margin: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              color: dayColor,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Center(
-              child: Text(
-                DateFormat.E().format(day), // Display the day name (Mon, Tue, etc.)
-                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
+  //         return Container(
+  //           margin: const EdgeInsets.all(4),
+  //           decoration: BoxDecoration(
+  //             color: dayColor,
+  //             borderRadius: BorderRadius.circular(10),
+  //           ),
+  //           child: Center(
+  //             child: Text(
+  //               DateFormat.E().format(day), // Display the day name (Mon, Tue, etc.)
+  //               style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+  //             ),
+  //           ),
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
