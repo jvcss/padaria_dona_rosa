@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:padaria_dona_rosa/bread.dart';
+import 'package:padaria_dona_rosa/checkout_screen.dart';
 import 'package:padaria_dona_rosa/dougth.dart';
 
 class BreadMakingScreen extends StatefulWidget {
@@ -49,7 +50,7 @@ class BreadMakingScreenState extends State<BreadMakingScreen> with SingleTickerP
 
     _controller.forward(); // Start rolling pin animation
 
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 2), () {
       setState(() {
         isDough = false; // Switch to bread after the loading animation
         breadCount += 1; // Increase the bread count
@@ -64,6 +65,7 @@ class BreadMakingScreenState extends State<BreadMakingScreen> with SingleTickerP
     return Scaffold(
       appBar: AppBar(
         title: const Text('Padaria Artesanal'),
+        centerTitle: true,
       ),
       body: Center(
         child: Stack(
@@ -96,10 +98,18 @@ class BreadMakingScreenState extends State<BreadMakingScreen> with SingleTickerP
                             }
                           : null,
                     ),
-                    Text('$breadCount ${breadCount == 1 ?'pão':'pães'}'),
+                    Text('$breadCount ${breadCount == 1 ? 'pão' : 'pães'}'),
                     IconButton(
                       icon: const Icon(Icons.add),
-                      onPressed: _animateToBread, // Trigger the transition to bread
+                      onPressed: (){
+                        if (isDough) {
+                          _animateToBread();
+                        } else {
+                          setState(() {
+                            breadCount++;
+                          });
+                        }
+                      }, // Trigger the transition to bread
                     ),
                   ],
                 ),
@@ -128,7 +138,12 @@ class BreadMakingScreenState extends State<BreadMakingScreen> with SingleTickerP
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Navigate to checkout screen
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CheckoutScreen(totalAmount: breadCount * 5.0),
+            ),
+          );
         },
         child: const Icon(Icons.shopping_basket),
       ),
