@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:padaria_dona_rosa/bread.dart';
 import 'package:padaria_dona_rosa/checkout_screen.dart';
 import 'package:padaria_dona_rosa/dougth.dart';
+import 'package:padaria_dona_rosa/strings.dart';
 
 class BreadMakingScreen extends StatefulWidget {
   const BreadMakingScreen({super.key});
@@ -60,12 +61,40 @@ class BreadMakingScreenState extends State<BreadMakingScreen> with SingleTickerP
     });
   }
 
+  void _showRepositoryInfo() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Sobre a Padaria'),
+          content: Text(info),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Fechar'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Padaria Artesanal'),
+        title: const Text('Padaria Artesanal Tia Rosa'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () {
+              _showRepositoryInfo(); // Function to show dialog
+            },
+          ),
+        ],
       ),
       body: Center(
         child: Stack(
@@ -101,7 +130,7 @@ class BreadMakingScreenState extends State<BreadMakingScreen> with SingleTickerP
                     Text('$breadCount ${breadCount == 1 ? 'pão' : 'pães'}'),
                     IconButton(
                       icon: const Icon(Icons.add),
-                      onPressed: (){
+                      onPressed: () {
                         if (isDough) {
                           _animateToBread();
                         } else {
