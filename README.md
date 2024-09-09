@@ -12,7 +12,7 @@ Esse projeto visa:
 
 - Ajudar clientes a terem ótimas experiencias com app e bons preços
 
-As featues base são:
+As featues visuais base são:
 
 - Lista produtos com animações encantadoras
 
