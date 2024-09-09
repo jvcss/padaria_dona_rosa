@@ -7,4 +7,6 @@ Esse projeto foi desenvolvido para a disciplina de Programação para Dispositiv
  ministrada pelo Professor Doutor \n\n William de Almeida Silva
 \n\n
 Este projeto está sob a licença MIT, disponível em: https://opensource.org/licenses/MIT
+\n\n
+Este código fonte ficará disponível publicamente após a entrega do trabalho.
 """;
